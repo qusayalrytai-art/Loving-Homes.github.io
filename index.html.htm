@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loving Homes - فندق الكلاب الفاخر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== إعادة تعيين عام ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== الخلفية الجذابة والمريحة ===== */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #F5F7FA 0%, #E8F4F8 25%, #F0E6FF 50%, #FFE6F0 75%, #F5F7FA 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== شريط التنقل ===== */
+        nav {
+            background: rgba(255, 255, 255, 0.97);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FF6B9D, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: #FF6B9D;
+            background: rgba(255, 107, 157, 0.1);
+        }
+
+        .nav-links a.active {
+            color: #FF6B9D;
+            background: rgba(255, 107, 157, 0.15);
+            border-bottom: 2px solid #FF6B9D;
+        }
+
+        /* ===== الحاوية ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== الأقسام ===== */
+        section {
+            padding: 4rem 0;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== قسم البطل ===== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #FF6B9D, #FFA500, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05);
+        }
+
+        /* ===== الأزرار ===== */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        button, .btn {
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B9D, #FF5A8D);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #FF6B9D;
+            border: 2px solid #FF6B9D;
+        }
+
+        .btn-secondary:hover {
+            background: #FF6B9D;
+            color: white;
+        }
+
+        /* ===== العناوين ===== */
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #FF6B9D, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== شبكة البطاقات ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 107, 157, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.15);
+            border-color: #FF6B9D;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #FF6B9D;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .card ul {
+            list-style: none;
+            text-align: right;
+        }
+
+        .card ul li {
+            color: #666;
+            margin: 0.6rem 0;
+            padding-right: 1rem;
+        }
+
+        .card ul li:before {
+            content: "✓ ";
+            color: #FF6B9D;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        /* ===== بطاقات الحزم ===== */
+        .package-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            text-align: center;
+            border: 2px solid rgba(255, 107, 157, 0.1);
+            position: relative;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.2);
+            border-color: #FF6B9D;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FF6B9D, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+        }
+
+        /* ===== صور المعرج ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-label {
+            transform: translateY(0);
+        }
+
+        /* ===== الإحصائيات ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 107, 157, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FF6B9D, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== نموذج الاتصال ===== */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 107, 157, 0.1);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.15);
+            border-color: #FF6B9D;
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            color: #FF6B9D;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .info-card strong {
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 107, 157, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FF6B9D;
+            box-shadow: 0 0 10px rgba(255, 107, 157, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* ===== الجدول ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #FF6B9D, #FFA500);
+            color: white;
+            padding: 1.5rem;
+            text-align: right;
+            font-weight: 700;
+        }
+
+        table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            text-align: right;
+            color: #666;
+        }
+
+        table tr:hover {
+            background: #f9f9f9;
+        }
+
+        /* ===== التذييل ===== */
+        footer {
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* ===== الاستجابة للأجهزة الصغيرة ===== */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            button, .btn {
+                width: 100%;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            table th, table td {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== شريط التنقل ===== -->
+    <nav>
+        <div class="logo" onclick="showSection('home')">❤️ Loving Homes</div>
+        <ul class="nav-links">
+            <li><a onclick="showSection('home')" class="nav-item active">الرئيسية</a></li>
+            <li><a onclick="showSection('services')" class="nav-item">الخدمات</a></li>
+            <li><a onclick="showSection('packages')" class="nav-item">الحزم</a></li>
+            <li><a onclick="showSection('gallery')" class="nav-item">المعرج</a></li>
+            <li><a onclick="showSection('contact')" class="nav-item">اتصل بنا</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== الصفحة الرئيسية ===== -->
+    <section id="home" class="active">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>مرحباً بك في لوفينغ هومز</h1>
+                    <p>أفضل فندق للكلاب في هونج كونج - حيث يشعر حيوانك الأليف بالحب والعناية الكاملة</p>
+                    <div class="btn-group">
+                        <button class="btn-primary" onclick="showSection('contact')">احجز الآن</button>
+                        <button class="btn-secondary" onclick="showSection('packages')">اعرف الحزم</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/hero-banner-UpVarj6yLg9VU3cbAFu8Cn.webp" alt="فندق الكلاب">
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 4rem;">خدماتنا المميزة</h2>
+            <p class="section-subtitle">نقدم مجموعة شاملة من الخدمات المتخصصة</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">💇</div>
+                    <h3>صالة الحالقة</h3>
+                    <p>خدمات تجميل واسترخاء متخصصة للعناية بفرو وجلد الكلب</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏠</div>
+                    <h3>غرف فاخرة</h3>
+                    <p>مزودة بتدفئة وتبريد تحت الأرضية وتلفزيون</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚗</div>
+                    <h3>خدمة التوصيل</h3>
+                    <p>توصيل آمن من وإلى منزلك في جميع أنحاء هونج كونج</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌳</div>
+                    <h3>مراعي خارجية</h3>
+                    <p>حدائق واسعة وآمنة مع مساحات متنوعة للعب</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏥</div>
+                    <h3>خدمات بيطرية</h3>
+                    <p>فريق طبي متخصص متاح على مدار الساعة</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📹</div>
+                    <h3>مراقبة الحيوانات</h3>
+                    <p>مراقبة مستمرة وتحديثات يومية بالصور</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== صفحة الخدمات ===== -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">خدماتنا المتميزة</h2>
+            <p class="section-subtitle">تعرف على كل خدمة بالتفصيل</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">💇</div>
+                    <h3>صالة الحالقة والمنتجع</h3>
+                    <p>خدمات تجميل واسترخاء متخصصة</p>
+                    <ul>
+                        <li>قص الشعر المتخصص</li>
+                        <li>تنظيف وتجفيف احترافي</li>
+                        <li>علاجات الجلد الطبيعية</li>
+                        <li>تدليك استرخائي</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🏠</div>
+                    <h3>غرف مزودة بتدفئة وتبريد</h3>
+                    <p>غرف فاخرة مع تحكم ذكي</p>
+                    <ul>
+                        <li>تحكم درجة الحرارة الذكي</li>
+                        <li>أسرة مريحة وفاخرة</li>
+                        <li>تلفزيون وترفيه</li>
+                        <li>إضاءة ناعمة وهادئة</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚗</div>
+                    <h3>خدمة التوصيل</h3>
+                    <p>توصيل آمن وموثوق</p>
+                    <ul>
+                        <li>سيارات مكيفة وآمنة</li>
+                        <li>سائقون مدربون</li>
+                        <li>توصيل في الوقت المحدد</li>
+                        <li>تتبع حي للرحلة</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🌳</div>
+                    <h3>مراعي خارجية آمنة</h3>
+                    <p>حدائق واسعة وآمنة</p>
+                    <ul>
+                        <li>أسوار آمنة وعالية</li>
+                        <li>مناطق ظل وراحة</li>
+                        <li>ألعاب وأنشطة متنوعة</li>
+                        <li>إشراف مستمر</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🏥</div>
+                    <h3>خدمات بيطرية 24/7</h3>
+                    <p>فريق طبي متخصص</p>
+                    <ul>
+                        <li>فحوصات طبية دورية</li>
+                        <li>علاجات طارئة</li>
+                        <li>استشارات صحية</li>
+                        <li>تطعيمات وأدوية</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📹</div>
+                    <h3>مراقبة الحيوانات الأليفة</h3>
+                    <p>مراقبة مستمرة وتحديثات</p>
+                    <ul>
+                        <li>كاميرات مراقبة حية</li>
+                        <li>تحديثات يومية بالصور</li>
+                        <li>تقارير سلوكية</li>
+                        <li>إشعارات فورية</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== صفحة الحزم ===== -->
+    <section id="packages">
+        <div class="container">
+            <h2 class="section-title">حزمنا المتنوعة</h2>
+            <p class="section-subtitle">اختر الحزمة التي تناسب احتياجات حيوانك الأليف</p>
+            
+            <div class="grid">
+                <div class="package-card">
+                    <div class="card-icon">🌟</div>
+                    <h3>حزمة اليوم</h3>
+                    <div class="price">60 $</div>
+                    <p style="color: #999; font-size: 0.9rem;">دولار / يوم</p>
+                    <ul class="card" style="list-style: none; margin: 1.5rem 0; padding: 0; background: none; box-shadow: none; border: none;">
+                        <li>✓ المشي مرتين يومياً</li>
+                        <li>✓ منطقة لعب خارجية</li>
+                        <li>✓ مسار الرشاقة</li>
+                        <li>✓ حفر حفرة في الرمل</li>
+                    </ul>
+                    <button class="btn-primary" onclick="showSection('contact')" style="width: 100%;">احجز الآن</button>
+                </div>
+
+                <div class="package-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>الحزمة الكلاسيكية</h3>
+                    <div class="price">100 $</div>
+                    <p style="color: #999; font-size: 0.9rem;">دولار / يوم</p>
+                    <ul class="card" style="list-style: none; margin: 1.5rem 0; padding: 0; background: none; box-shadow: none; border: none;">
+                        <li>✓ المشي 3 مرات يومياً</li>
+                        <li>✓ 3 أنشطة يومية</li>
+                        <li>✓ حظيرة لعب داخلية</li>
+                        <li>✓ جلسة حالقة وتنظيف</li>
+                    </ul>
+                    <button class="btn-primary" onclick="showSection('contact')" style="width: 100%;">احجز الآن</button>
+                </div>
+
+                <div class="package-card">
+                    <div class="card-icon">✨</div>
+                    <h3>الحزمة المميزة</h3>
+                    <div class="price">150 $</div>
+                    <p style="color: #999; font-size: 0.9rem;">دولار / يوم</p>
+                    <ul class="card" style="list-style: none; margin: 1.5rem 0; padding: 0; background: none; box-shadow: none; border: none;">
+                        <li>✓ المشي 4 مرات يومياً</li>
+                        <li>✓ 4 أنشطة يومية</li>
+                        <li>✓ مساحة عشب خاصة</li>
+                        <li>✓ تحديثات يومية</li>
+                    </ul>
+                    <button class="btn-primary" onclick="showSection('contact')" style="width: 100%;">احجز الآن</button>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>الميزة</th>
+                        <th>حزمة اليوم</th>
+                        <th>الحزمة الكلاسيكية</th>
+                        <th>الحزمة المميزة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>المشي اليومي</strong></td>
+                        <td>مرتين</td>
+                        <td>3 مرات</td>
+                        <td>4 مرات</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الأنشطة</strong></td>
+                        <td>متنوعة</td>
+                        <td>3 أنشطة</td>
+                        <td>4 أنشطة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>التحديثات اليومية</strong></td>
+                        <td>-</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الخدمات البيطرية</strong></td>
+                        <td>عادية</td>
+                        <td>عادية</td>
+                        <td>أولوية</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ===== صفحة المعرج ===== -->
+    <section id="gallery">
+        <div class="container">
+            <h2 class="section-title">معرج الصور</h2>
+            <p class="section-subtitle">شاهد صور من منشآتنا الفاخرة</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/hero-banner-UpVarj6yLg9VU3cbAFu8Cn.webp" alt="الفندق الفاخر">
+                    <div class="gallery-label">
+                        <h3>الفندق الفاخر</h3>
+                        <p>كلاب سعيدة في بيئة فاخرة</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/outdoor-garden-aWLNk6to6wf9AQNcp7Kkgv.webp" alt="الحديقة الخارجية">
+                    <div class="gallery-label">
+                        <h3>الحديقة الخارجية</h3>
+                        <p>مساحة خضراء واسعة آمنة</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/grooming-spa-24DR7cJvP9XHpFLBfeuX3x.webp" alt="صالة الحالقة">
+                    <div class="gallery-label">
+                        <h3>صالة الحالقة</h3>
+                        <p>خدمات تجميل متخصصة</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/premium-rooms-V7TQgDmsYWQpiidWzVurq6.webp" alt="الغرف الفاخرة">
+                    <div class="gallery-label">
+                        <h3>الغرف الفاخرة</h3>
+                        <p>غرف مريحة مع تكييف</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/veterinary-care-9pQZZDQxuSzs8fHUNRCmPB.webp" alt="الخدمات البيطرية">
+                    <div class="gallery-label">
+                        <h3>الخدمات البيطرية</h3>
+                        <p>فريق طبي متخصص</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-text">كلب سعيد</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-text">سنوات خبرة</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-text">خدمة طوارئ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-text">رضا العملاء</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== صفحة الاتصال ===== -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">تواصل معنا</h2>
+            <p class="section-subtitle">نحن هنا للإجابة على جميع أسئلتك</p>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3>📍 العنوان</h3>
+                        <p>هونج كونج، منطقة النيابة العامة</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>📞 الهاتف</h3>
+                        <p><strong>0778446977</strong></p>
+                        <p style="font-size: 0.95rem; margin-top: 0.5rem; color: #999;">متاح 24/7 للطوارئ</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>📧 البريد الإلكتروني</h3>
+                        <p>info@lovinghomes.hk</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>🕐 ساعات العمل</h3>
+                        <p><strong>مفتوح 24/7</strong></p>
+                        <p style="font-size: 0.95rem; margin-top: 0.5rem; color: #999;">الاستقبال: 8:00 صباحاً - 8:00 مساءً</p>
+                    </div>
+                </div>
+
+                <form class="contact-form" action="https://formspree.io/f/mnjbyokv" method="POST">
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل</label>
+                        <input type="text" id="name" name="name" placeholder="اكتب اسمك الكامل" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone" placeholder="0778446977">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">الرسالة</label>
+                        <textarea id="message" name="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%;">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- ===== JavaScript ===== -->
+    <script>
+        // دالة عرض الأقسام المختلفة
+        function showSection(sectionId) {
+            // إخفاء جميع الأقسام
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // إزالة الفئة النشطة من جميع الروابط
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // عرض القسم المطلوب
+            document.getElementById(sectionId).classList.add('active');
+
+            // إضافة الفئة النشطة للرابط المطلوب
+            event.target.classList.add('active');
+
+            // التمرير إلى أعلى الصفحة
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
