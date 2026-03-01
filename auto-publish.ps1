@@ -1,0 +1,59 @@
+$ErrorActionPreference = ""
+
+$repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $repoRoot
+
+$targetFile = Join-Path $repoRoot "index.html"
+if (-not (Test-Path -LiteralPath $targetFile)) {
+    Write-Host "index.html not found in $repoRoot" -ForegroundColor Red
+    exit 1
+}
+
+Write-Host "Watching index.html for changes. Press Ctrl+C to stop." -ForegroundColor Cyan
+
+$watcher = New-Object System.IO.FileSystemWatcher
+$watcher.Path = $repoRoot
+$watcher.Filter = "index.html"
+$watcher.NotifyFilter = [System.IO.NotifyFilters]'LastWrite, Size, FileName'
+$watcher.EnableRaisingEvents = $true
+
+$isPublishing = $false
+
+$publishAction = {
+    if ($script:isPublishing) { return }
+    $script:isPublishing = $true
+    try {
+        Start-Sleep -Milliseconds 700
+        $changes = git status --porcelain
+        if (-not $changes) { return }
+
+        git add index.html
+        $stamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        git commit -m "Auto publish: $stamp" | Out-Null
+        git push | Out-Null
+        Write-Host "Published update at $stamp" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "Publish failed: $($_.Exception.Message)" -ForegroundColor Red
+    }
+    finally {
+        $script:isPublishing = $false
+    }
+}
+
+$handlers = @(
+    Register-ObjectEvent -InputObject $watcher -EventName Changed -Action $publishAction
+    Register-ObjectEvent -InputObject $watcher -EventName Created -Action $publishAction
+    Register-ObjectEvent -InputObject $watcher -EventName Renamed -Action $publishAction
+)
+
+try {
+    while ($true) { Start-Sleep -Seconds 1 }
+}
+finally {
+    foreach ($h in $handlers) {
+        Unregister-Event -SourceIdentifier $h.Name -ErrorAction SilentlyContinue
+        Remove-Job -Id $h.Id -Force -ErrorAction SilentlyContinue
+    }
+    $watcher.Dispose()
+}
