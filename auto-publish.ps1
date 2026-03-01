@@ -3,9 +3,9 @@ $ErrorActionPreference = ""
 $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $repoRoot
 
-$targetFile = Join-Path $repoRoot "index.html"
+$targetFile = Join-Path $repoRoot "index.html.htm"
 if (-not (Test-Path -LiteralPath $targetFile)) {
-    Write-Host "index.html not found in $repoRoot" -ForegroundColor Red
+    Write-Host "index.html.htm not found in $repoRoot" -ForegroundColor Red
     exit 1
 }
 
