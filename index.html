@@ -32,61 +32,52 @@
         }
 
         /* ===== شريط التنقل ===== */
-        nav {
-            background: rgba(255, 255, 255, 0.97);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
+      /* ============================= */
+/*        NAVBAR DESIGN         */
+/* ============================= */
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #FF6B9D, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
+/* الشريط العلوي */
+nav {
+    background: rgba(255,255,255,0.97); /* خلفية بيضاء خفيفة */
+    padding: 0.4rem 1.5rem; /* تصغير الحواف (كان أكبر) */
+    display: flex; /* ترتيب العناصر أفقي */
+    justify-content: space-between; /* توزيع اللوقو والروابط */
+    align-items: center; /* توسيط عمودي */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); /* ظل خفيف */
+    position: sticky; /* يثبت فوق */
+    top: 0;
+    z-index: 100;
+}
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
+/* تصغير اللوقو */
+.logo {
+    height: 60px; /* كان 120px */
+}
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
+/* روابط الناف */
+.nav-links {
+    display: flex;
+    gap: 1.2rem; /* تقليل المسافة بين الروابط */
+    list-style: none;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
+/* شكل الروابط */
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem; /* تصغير الحواف */
+    border-radius: 6px;
+    font-size: 0.9rem; /* تصغير الخط */
+    transition: 0.3s;
+    cursor: pointer;
+}
 
-        .nav-links a:hover {
-            color: #FF6B9D;
-            background: rgba(255, 107, 157, 0.1);
-        }
-
-        .nav-links a.active {
-            color: #FF6B9D;
-            background: rgba(255, 107, 157, 0.15);
-            border-bottom: 2px solid #FF6B9D;
-        }
-
+/* عند المرور على الرابط */
+.nav-links a:hover {
+    background: #ff7a00;
+    color: white;
+}
         /* ===== الحاوية ===== */
         .container {
             max-width: 1200px;
@@ -187,6 +178,19 @@
             color: white;
         }
 
+        .btn-details {
+            background: #FF6B9D;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-details:hover {
+            background: #FF5A8D;
+        }
+
         /* ===== العناوين ===== */
         .section-title {
             font-size: 2.8rem;
@@ -223,6 +227,7 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s;
             border: 1px solid rgba(255, 107, 157, 0.1);
+            cursor: pointer;
         }
 
         .card:hover {
@@ -268,6 +273,134 @@
             color: #FF6B9D;
             font-weight: bold;
             margin-left: 0.5rem;
+        }
+
+        /* ===== النافذة المنبثقة (Modal) ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease-in;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #FF6B9D;
+            padding-bottom: 1rem;
+        }
+
+        .modal-header h2 {
+            color: #FF6B9D;
+            font-size: 1.8rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #FF6B9D;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            margin-bottom: 2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .modal-body h3 {
+            color: #FF6B9D;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .modal-body ul li {
+            margin: 0.5rem 0;
+            padding-right: 1rem;
+        }
+
+        .modal-body ul li:before {
+            content: "✓ ";
+            color: #FF6B9D;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .modal-footer button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-footer .btn-book {
+            background: linear-gradient(135deg, #FF6B9D, #FF5A8D);
+            color: white;
+        }
+
+        .modal-footer .btn-book:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .modal-footer .btn-close {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .modal-footer .btn-close:hover {
+            background: #e0e0e0;
         }
 
         /* ===== بطاقات الحزم ===== */
@@ -533,6 +666,11 @@
                 grid-template-columns: 1fr;
             }
 
+            .modal-content {
+                padding: 2rem;
+                width: 95%;
+            }
+
             table {
                 font-size: 0.9rem;
             }
@@ -546,15 +684,32 @@
 <body>
     <!-- ===== شريط التنقل ===== -->
     <nav>
-        <div class="logo" onclick="showSection('home')">❤️ Loving Homes</div>
+        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/logo-loving-homes-dBQwz3vRTBjde8kaqSm62T.webp" alt="Loving Homes Logo" onclick="showSection('home')" style="height: 120px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
         <ul class="nav-links">
             <li><a onclick="showSection('home')" class="nav-item active">الرئيسية</a></li>
             <li><a onclick="showSection('services')" class="nav-item">الخدمات</a></li>
             <li><a onclick="showSection('packages')" class="nav-item">الحزم</a></li>
-            <li><a onclick="showSection('gallery')" class="nav-item">المعرض</a></li>
+            <li><a onclick="showSection('gallery')" class="nav-item">المعرج</a></li>
             <li><a onclick="showSection('contact')" class="nav-item">اتصل بنا</a></li>
         </ul>
     </nav>
+
+    <!-- ===== النافذة المنبثقة (Modal) ===== -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">تفاصيل الخدمة</h2>
+                <button class="close-btn" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- سيتم ملء المحتوى بواسطة JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-book" onclick="goToBooking()">احجز الآن</button>
+                <button class="btn-close" onclick="closeModal()">إغلاق</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ===== الصفحة الرئيسية ===== -->
     <section id="home" class="active">
@@ -577,35 +732,41 @@
             <p class="section-subtitle">نقدم مجموعة شاملة من الخدمات المتخصصة</p>
             
             <div class="grid">
-                <div class="card">
-                    <div class="card-icon">💇</div>
+                <div class="card" onclick="showServiceDetails('grooming')">
+                    <div class="card-icon">🐕‍🦺</div>
                     <h3>صالة الحالقة</h3>
                     <p>خدمات تجميل واسترخاء متخصصة للعناية بفرو وجلد الكلب</p>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('rooms')">
                     <div class="card-icon">🏠</div>
                     <h3>غرف فاخرة</h3>
                     <p>مزودة بتدفئة وتبريد تحت الأرضية وتلفزيون</p>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('delivery')">
                     <div class="card-icon">🚗</div>
                     <h3>خدمة التوصيل</h3>
                     <p>توصيل آمن من وإلى منزلك في جميع أنحاء هونج كونج</p>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('gardens')">
                     <div class="card-icon">🌳</div>
                     <h3>مراعي خارجية</h3>
                     <p>حدائق واسعة وآمنة مع مساحات متنوعة للعب</p>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('veterinary')">
                     <div class="card-icon">🏥</div>
                     <h3>خدمات بيطرية</h3>
                     <p>فريق طبي متخصص متاح على مدار الساعة</p>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('monitoring')">
                     <div class="card-icon">📹</div>
                     <h3>مراقبة الحيوانات</h3>
                     <p>مراقبة مستمرة وتحديثات يومية بالصور</p>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
             </div>
         </div>
@@ -618,76 +779,46 @@
             <p class="section-subtitle">تعرف على كل خدمة بالتفصيل</p>
             
             <div class="grid">
-                <div class="card">
-                    <div class="card-icon">💇</div>
+                <div class="card" onclick="showServiceDetails('grooming')">
+                    <div class="card-icon">🐕‍🦺</div>
                     <h3>صالة الحالقة والمنتجع</h3>
                     <p>خدمات تجميل واسترخاء متخصصة</p>
-                    <ul>
-                        <li>قص الشعر المتخصص</li>
-                        <li>تنظيف وتجفيف احترافي</li>
-                        <li>علاجات الجلد الطبيعية</li>
-                        <li>تدليك استرخائي</li>
-                    </ul>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
 
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('rooms')">
                     <div class="card-icon">🏠</div>
                     <h3>غرف مزودة بتدفئة وتبريد</h3>
                     <p>غرف فاخرة مع تحكم ذكي</p>
-                    <ul>
-                        <li>تحكم درجة الحرارة الذكي</li>
-                        <li>أسرة مريحة وفاخرة</li>
-                        <li>تلفزيون وترفيه</li>
-                        <li>إضاءة ناعمة وهادئة</li>
-                    </ul>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
 
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('delivery')">
                     <div class="card-icon">🚗</div>
                     <h3>خدمة التوصيل</h3>
                     <p>توصيل آمن وموثوق</p>
-                    <ul>
-                        <li>سيارات مكيفة وآمنة</li>
-                        <li>سائقون مدربون</li>
-                        <li>توصيل في الوقت المحدد</li>
-                        <li>تتبع حي للرحلة</li>
-                    </ul>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
 
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('gardens')">
                     <div class="card-icon">🌳</div>
                     <h3>مراعي خارجية آمنة</h3>
                     <p>حدائق واسعة وآمنة</p>
-                    <ul>
-                        <li>أسوار آمنة وعالية</li>
-                        <li>مناطق ظل وراحة</li>
-                        <li>ألعاب وأنشطة متنوعة</li>
-                        <li>إشراف مستمر</li>
-                    </ul>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
 
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('veterinary')">
                     <div class="card-icon">🏥</div>
                     <h3>خدمات بيطرية 24/7</h3>
                     <p>فريق طبي متخصص</p>
-                    <ul>
-                        <li>فحوصات طبية دورية</li>
-                        <li>علاجات طارئة</li>
-                        <li>استشارات صحية</li>
-                        <li>تطعيمات وأدوية</li>
-                    </ul>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
 
-                <div class="card">
+                <div class="card" onclick="showServiceDetails('monitoring')">
                     <div class="card-icon">📹</div>
                     <h3>مراقبة الحيوانات الأليفة</h3>
                     <p>مراقبة مستمرة وتحديثات</p>
-                    <ul>
-                        <li>كاميرات مراقبة حية</li>
-                        <li>تحديثات يومية بالصور</li>
-                        <li>تقارير سلوكية</li>
-                        <li>إشعارات فورية</li>
-                    </ul>
+                    <button class="btn-details">اعرف أكثر</button>
                 </div>
             </div>
         </div>
@@ -782,10 +913,10 @@
         </div>
     </section>
 
-    <!-- =====صفحة المعر ===== -->
+    <!-- ===== صفحة المعرج ===== -->
     <section id="gallery">
         <div class="container">
-            <h2 class="section-title">معرض الصور</h2>
+            <h2 class="section-title">معرج الصور</h2>
             <p class="section-subtitle">شاهد صور من منشآتنا الفاخرة</p>
             
             <div class="gallery-grid">
@@ -828,6 +959,7 @@
                         <p>فريق طبي متخصص</p>
                     </div>
                 </div>
+
             </div>
 
             <div class="stats">
@@ -884,13 +1016,34 @@
 
                 <form class="contact-form" action="https://formspree.io/f/mnjbyokv" method="POST">
                     <div class="form-group">
+                        <label for="service">ما الذي سوف تحجزه؟</label>
+                        <select id="service" name="service" required style="width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 10px; font-family: 'Cairo', sans-serif; font-size: 1rem; transition: all 0.3s;">
+                            <option value="">-- اختر الخدمة أو الحزمة --</option>
+                            <option value="صالة الحالقة والمنتجع">صالة الحالقة والمنتجع</option>
+                            <option value="غرف مزودة بتدفئة وتبريد">غرف مزودة بتدفئة وتبريد</option>
+                            <option value="خدمة التوصيل">خدمة التوصيل</option>
+                            <option value="مراعي خارجية آمنة">مراعي خارجية آمنة</option>
+                            <option value="خدمات بيطرية 24/7">خدمات بيطرية 24/7</option>
+                            <option value="مراقبة الحيوانات الأليفة">مراقبة الحيوانات الأليفة</option>
+                            <option value="حزمة اليوم (60$)">حزمة اليوم (60$)</option>
+                            <option value="الحزمة الكلاسيكية (100$)">الحزمة الكلاسيكية (100$)</option>
+                            <option value="الحزمة المميزة (150$)">الحزمة المميزة (150$)</option>
+                            <option value="استفسار عام">استفسار عام</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="name">الاسم الكامل</label>
                         <input type="text" id="name" name="name" placeholder="اكتب اسمك الكامل" required>
                     </div>
 
+                              <div class="form-group">
+                        <label>بريدك الإلكتروني:</label>
+                        <input type="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
                     <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                        <label>ما اسم حيوانك:</label>
+                        <input type="text" name="pet_name" placeholder="أدخل اسم حيوانك الأليف" required>
                     </div>
 
                     <div class="form-group">
@@ -908,8 +1061,115 @@
             </div>
         </div>
     </section>
+
+    
+
     <!-- ===== JavaScript ===== -->
     <script>
+        // بيانات الخدمات من السيناريو
+        const servicesData = {
+            grooming: {
+                title: '💇 صالة الحالقة والمنتجع',
+                description: 'خدمات تجميل واسترخاء متخصصة للعناية الكاملة بفرو وجلد الكلب',
+                details: [
+                    'قص الشعر المتخصص حسب نوع الكلب',
+                    'تنظيف وتجفيف احترافي',
+                    'علاجات الجلد الطبيعية والعضوية',
+                    'تدليك استرخائي للعضلات',
+                    'علاج الأذن والأسنان',
+                    'تقليم الأظافر والمخالب'
+                ]
+            },
+            rooms: {
+                title: '🏠 غرف مزودة بتدفئة وتبريد',
+                description: 'غرف فاخرة مع تحكم ذكي بدرجة الحرارة وتلفزيون',
+                details: [
+                    'تحكم ذكي بدرجة الحرارة (18-26 درجة مئوية)',
+                    'أسرة مريحة وفاخرة مع وسائد ناعمة',
+                    'تلفزيون وموسيقى استرخائية',
+                    'إضاءة ناعمة وهادئة',
+                    'تهوية طبيعية وآمنة',
+                    'نظافة يومية وتعقيم شامل'
+                ]
+            },
+            delivery: {
+                title: '🚗 خدمة التوصيل',
+                description: 'توصيل آمن وموثوق من وإلى منزلك في جميع أنحاء هونج كونج',
+                details: [
+                    'سيارات مكيفة وآمنة وفسيحة',
+                    'سائقون مدربون على التعامل مع الحيوانات',
+                    'توصيل في الوقت المحدد بدقة',
+                    'تتبع حي للرحلة عبر الهاتف',
+                    'تأمين شامل للحيوان',
+                    'توصيل مجاني للحجوزات الطويلة'
+                ]
+            },
+            gardens: {
+                title: '🌳 مراعي خارجية آمنة',
+                description: 'حدائق واسعة وآمنة مع مساحات متنوعة للعب والركض',
+                details: [
+                    'أسوار آمنة وعالية (2 متر)',
+                    'مناطق ظل وراحة مع مقاعد',
+                    'ألعاب وأنشطة متنوعة',
+                    'إشراف مستمر من الموظفين',
+                    'مياه عذبة وباردة متوفرة',
+                    'مناطق منفصلة للكلاب الصغيرة والكبيرة'
+                ]
+            },
+            veterinary: {
+                title: '🏥 خدمات بيطرية 24/7',
+                description: 'فريق طبي متخصص متاح على مدار الساعة لصحة حيوانك الأليف',
+                details: [
+                    'فحوصات طبية دورية وشاملة',
+                    'علاجات طارئة في أي وقت',
+                    'استشارات صحية متخصصة',
+                    'تطعيمات وأدوية موثوقة',
+                    'عمليات جراحية إذا لزم الأمر',
+                    'تقارير صحية مفصلة للعملاء'
+                ]
+            },
+            monitoring: {
+                title: '📹 مراقبة الحيوانات الأليفة',
+                description: 'مراقبة مستمرة وتحديثات يومية عن حالة حيوانك الأليف',
+                details: [
+                    'كاميرات مراقبة حية 24/7',
+                    'تحديثات يومية بالصور والفيديو',
+                    'تقارير سلوكية مفصلة',
+                    'إشعارات فورية في حالة الطوارئ',
+                    'تطبيق خاص للعملاء للمتابعة',
+                    'تسجيل نشاطات الكلب اليومية'
+                ]
+            }
+        };
+
+        // دالة عرض تفاصيل الخدمة
+        function showServiceDetails(serviceId) {
+            const service = servicesData[serviceId];
+            if (!service) return;
+
+            document.getElementById('modalTitle').textContent = service.title;
+            
+            let detailsHTML = `<p>${service.description}</p><h3>الميزات:</h3><ul>`;
+            service.details.forEach(detail => {
+                detailsHTML += `<li>${detail}</li>`;
+            });
+            detailsHTML += '</ul>';
+
+            document.getElementById('modalBody').innerHTML = detailsHTML;
+            document.getElementById('serviceModal').classList.add('show');
+        }
+
+        // دالة إغلاق النافذة المنبثقة
+        function closeModal() {
+            document.getElementById('serviceModal').classList.remove('show');
+        }
+
+        // دالة الذهاب للحجز
+        function goToBooking() {
+            closeModal();
+            showSection('contact');
+        }
+
         // دالة عرض الأقسام المختلفة
         function showSection(sectionId) {
             // إخفاء جميع الأقسام
@@ -932,6 +1192,14 @@
 
             // التمرير إلى أعلى الصفحة
             window.scrollTo(0, 0);
+        }
+
+        // إغلاق النافذة عند الضغط خارجها
+        window.onclick = function(event) {
+            const modal = document.getElementById('serviceModal');
+            if (event.target === modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
