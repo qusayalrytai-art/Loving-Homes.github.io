@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوفينج هومز - فندق الكلاب الفاخر</title>
+    
+    <!-- استيراد الخطوط من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- بداية أنماط CSS -->
+    <style>
+        /* إعادة تعيين الأنماط الأساسية */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* إعدادات الصفحة الرئيسية */
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #F5F7FA 0%, #E8F4F8 25%, #F0E6FF 50%, #FFE6F0 75%, #F5F7FA 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* حركة الخلفية المتحركة */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* تنسيق شريط التنقل العلوي */
+        nav {
+            background: rgba(255, 255, 255, 0.97);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+
+        /* قائمة التنقل */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        /* روابط التنقل */
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        /* تأثير عند التمرير على الروابط */
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #FF6B9D;
+            background: rgba(255, 107, 157, 0.1);
+        }
+
+        /* تنسيق الحاوية الرئيسية */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        /* تنسيق الأقسام */
+        section {
+            padding: 4rem 2rem;
+            display: none;
+        }
+
+        /* إظهار القسم النشط فقط */
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        /* حركة الظهور السلسة */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* تنسيق قسم الترحيب */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        /* العنوان الرئيسي */
+        .hero h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #FF6B9D, #FFA500, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        /* الفقرة الوصفية */
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* صورة الترحيب */
+        .hero img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* تنسيق عناوين الأقسام */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #FF6B9D, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        /* النص الفرعي للأقسام */
+        .section-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        /* تنسيق شبكة البطاقات */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* تنسيق البطاقات */
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        /* تأثير عند التمرير على البطاقة */
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.15);
+        }
+
+        /* أيقونة البطاقة */
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* عنوان البطاقة */
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #FF6B9D;
+        }
+
+        /* نص البطاقة */
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* تنسيق الأزرار */
+        button,
+        .btn {
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        /* زر أساسي */
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B9D, #FF5A8D);
+            color: white;
+        }
+
+        /* تأثير عند التمرير على الزر */
+        .btn-primary:hover {
+            transform: translateY(-3px);
+        }
+
+        /* زر التفاصيل */
+        .btn-details {
+            background: #FF6B9D;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* تنسيق النافذة المنبثقة */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        /* إظهار النافذة المنبثقة */
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* محتوى النافذة المنبثقة */
+        .modal-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin: auto;
+        }
+
+        /* رأس النافذة المنبثقة */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #FF6B9D;
+            padding-bottom: 1rem;
+        }
+
+        /* عنوان النافذة المنبثقة */
+        .modal-header h2 {
+            color: #FF6B9D;
+        }
+
+        /* زر الإغلاق */
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #FF6B9D;
+            cursor: pointer;
+        }
+
+        /* محتوى النافذة المنبثقة */
+        .modal-body {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* عناوين في المحتوى */
+        .modal-body h3 {
+            color: #FF6B9D;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* قوائم في المحتوى */
+        .modal-body ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        /* عناصر القائمة */
+        .modal-body li {
+            padding: 0.5rem 0;
+            padding-right: 1rem;
+        }
+
+        /* رمز قبل كل عنصر قائمة */
+        .modal-body li:before {
+            content: "✓ ";
+            color: #FF6B9D;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        /* تنسيق قسم الاتصال */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        /* بطاقة المعلومات */
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1rem;
+        }
+
+        /* عنوان بطاقة المعلومات */
+        .info-card h3 {
+            color: #FF6B9D;
+            margin-bottom: 0.5rem;
+        }
+
+        /* نموذج الاتصال */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* مجموعة حقول النموذج */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        /* تسميات الحقول */
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* حقول الإدخال والاختيار والنصوص */
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        /* تأثير التركيز على الحقول */
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #FF6B9D;
+            outline: none;
+        }
+
+        /* منطقة النصوص */
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* تنسيق المعرج */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* عنصر المعرج */
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        /* تأثير عند التمرير على الصورة */
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* صورة المعرج */
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* تسمية الصورة */
+        .gallery-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        /* إظهار التسمية عند التمرير */
+        .gallery-item:hover .gallery-label {
+            transform: translateY(0);
+        }
+
+        /* تنسيق الإحصائيات */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* بطاقة الإحصائية */
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* رقم الإحصائية */
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #FF6B9D;
+            margin-bottom: 0.5rem;
+        }
+
+        /* نص الإحصائية */
+        .stat-text {
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* تنسيق التذييل */
+        footer {
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* رابط التخطي */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #FF6B9D;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        /* إظهار رابط التخطي عند التركيز */
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* تنسيق الفيديو */
+        video {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin-top: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* استجابة الشاشات الكبيرة */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; gap: 1.5rem; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            .nav-links { gap: 1rem; font-size: 0.95rem; }
+            .container { padding: 0 1.5rem; }
+            section { padding: 3rem 1.5rem; }
+        }
+
+        /* استجابة الشاشات المتوسطة */
+        @media (max-width: 768px) {
+            html { font-size: 14px; }
+            .hero { grid-template-columns: 1fr; gap: 1.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 0.95rem; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .nav-links { gap: 0.5rem; font-size: 0.85rem; flex-wrap: wrap; }
+            .section-title { font-size: 1.8rem; }
+            .section-subtitle { font-size: 0.95rem; }
+            .card { padding: 1.5rem; }
+            .card-icon { font-size: 2rem; }
+            .card h3 { font-size: 1.1rem; }
+            .modal-content { width: 95%; padding: 1.5rem; }
+            .form-group input, .form-group select, .form-group textarea { font-size: 16px; }
+            .container { padding: 0 1rem; }
+            section { padding: 2rem 1rem; }
+            nav { padding: 0.8rem 1rem; }
+            .nav-links a { padding: 0.4rem 0.8rem; }
+        }
+
+        /* استجابة الشاشات الصغيرة */
+        @media (max-width: 480px) {
+            html { font-size: 13px; }
+            .hero { gap: 1rem; }
+            .hero h1 { font-size: 1.5rem; line-height: 1.1; }
+            .hero p { font-size: 0.9rem; }
+            .section-title { font-size: 1.3rem; line-height: 1.1; }
+            .section-subtitle { font-size: 0.85rem; }
+            .grid { grid-template-columns: 1fr; gap: 1rem; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .gallery-item { height: 250px; }
+            .card { padding: 1rem; margin-bottom: 0.5rem; }
+            .card-icon { font-size: 1.8rem; }
+            .card h3 { font-size: 1rem; }
+            .card p { font-size: 0.85rem; }
+            .stats { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .stat-card { padding: 1rem; }
+            .stat-number { font-size: 1.5rem; }
+            .stat-text { font-size: 0.85rem; }
+            .contact-wrapper { gap: 1rem; }
+            .info-card { padding: 1rem; margin-bottom: 0.8rem; }
+            .contact-form { padding: 1rem; }
+            .form-group { margin-bottom: 0.8rem; }
+            .form-group label { font-size: 0.9rem; }
+            .form-group input, .form-group select, .form-group textarea { padding: 0.6rem; font-size: 16px; border-radius: 8px; }
+            .btn-primary { padding: 0.7rem 1.4rem; font-size: 0.9rem; }
+            .btn-details { padding: 0.5rem 1rem; font-size: 0.85rem; }
+            .modal-content { padding: 1rem; border-radius: 15px; width: 95%; }
+            .modal-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 0.8rem; }
+            .modal-header h2 { font-size: 1.2rem; }
+            .close-btn { font-size: 1.3rem; align-self: flex-end; }
+            .modal-body { margin-bottom: 1.5rem; font-size: 0.9rem; }
+            .modal-body li { padding: 0.3rem 0; font-size: 0.9rem; }
+            video { margin-top: 1rem; border-radius: 15px; }
+            #accessibilityWidget { bottom: 15px; right: 15px; }
+            #accessibilityWidget button { width: 50px; height: 50px; font-size: 1.4rem; }
+            #accessibilityMenu { min-width: 180px; padding: 1rem; font-size: 0.9rem; }
+            #accessibilityMenu button { font-size: 0.85rem; padding: 0.6rem 0.8rem; }
+            footer { padding: 1rem 0; font-size: 0.9rem; }
+            .container { padding: 0 1rem; }
+            section { padding: 1.5rem 1rem; }
+            nav { padding: 0.6rem 0.8rem; gap: 0.5rem; }
+            .nav-links { gap: 0.3rem; font-size: 0.75rem; }
+            .nav-links a { padding: 0.3rem 0.5rem; }
+            img { max-width: 100%; height: auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- رابط التخطي للمحتوى الرئيسي -->
+    <a href="#main" class="skip-link">انتقل إلى المحتوى الرئيسي</a>
+    
+    <!-- شريط التنقل العلوي -->
+    <nav role="navigation" aria-label="القائمة الرئيسية">
+        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/logo-loving-homes-dBQwz3vRTBjde8kaqSm62T.webp" alt="شعار لوفينج هومز" onclick="showSection('home')" style="height:40px;cursor:pointer;">
+        
+        <ul class="nav-links">
+            <li><a onclick="showSection('home')" class="nav-item active">الرئيسية</a></li>
+            <li><a onclick="showSection('services')" class="nav-item">الخدمات</a></li>
+            <li><a onclick="showSection('packages')" class="nav-item">الحزم</a></li>
+            <li><a onclick="showSection('gallery')" class="nav-item">المعرض</a></li>
+            <li><a onclick="showSection('contact')" class="nav-item">التواصل</a></li>
+        </ul>
+    </nav>
+    
+    <!-- زر الوصول لذوي الاحتياجات الخاصة -->
+    <div id="accessibilityWidget" style="position:fixed;bottom:30px;right:30px;z-index:999;">
+        <button id="accessibilityBtn" onclick="toggleAccessibilityMenu()" style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#FF6B9D,#FFA500);border:none;color:white;font-size:1.8rem;cursor:pointer;box-shadow:0 5px 20px rgba(255,107,157,0.3);transition:all 0.3s;display:flex;align-items:center;justify-content:center;" aria-label="خيارات الوصول" title="خيارات الوصول">♿</button>
+        
+        <div id="accessibilityMenu" style="position:absolute;bottom:80px;right:0;background:white;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:1.5rem;display:none;min-width:250px;z-index:1000;">
+            <h3 style="margin-top:0;margin-bottom:1.5rem;color:#FF6B9D;font-size:1rem;text-align:right;font-weight:700;">خيارات الوصول</h3>
+            
+            <div style="margin-bottom:1.2rem;">
+                <button onclick="toggleHighContrast()" id="contrastBtn" style="width:100%;padding:0.8rem 1rem;background:#f5f5f5;border:2px solid #FF6B9D;border-radius:10px;color:#333;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:'Cairo',sans-serif;font-size:0.95rem;text-align:right;">التباين العالي</button>
+            </div>
+            
+            <div>
+                <button onclick="toggleLargeText()" id="textBtn" style="width:100%;padding:0.8rem 1rem;background:#f5f5f5;border:2px solid #FF6B9D;border-radius:10px;color:#333;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:'Cairo',sans-serif;font-size:0.95rem;text-align:right;">تكبير النصوص</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <main id="main">
+        <!-- قسم الرئيسية -->
+        <section id="home" class="active">
+            <div class="container">
+                <div class="hero">
+                    <div>
+                        <h1>أهلاً بك في لوفينج هومز</h1>
+                        <p>أفضل فندق فاخر للكلاب في هونج كونج</p>
+                        <p style="font-size:1rem;color:#666;">نوفر خدمات عالية الجودة وعناية متخصصة لحيوانك الأليف</p>
+                        
+                        <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
+                            <button class="btn-primary" onclick="showSection('services')">اكتشف الخدمات</button>
+                            <button class="btn-primary" onclick="showSection('contact')">احجز الآن</button>
+                        </div>
+                    </div>
+                    
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/hero-banner-UpVarj6yLg9VU3cbAFu8Cn.webp" alt="فندق لوفينج هومز الفاخر">
+                </div>
+                
+                <div style="margin-top:4rem;border-radius:20px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.15);">
+                    <video width="100%" height="auto" controls aria-label="فيديو عن رعاية الكلاب">
+                        <source src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/video-dogs-care_839ea356.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الخدمات -->
+        <section id="services">
+            <div class="container">
+                <h2 class="section-title">خدماتنا المميزة</h2>
+                <p class="section-subtitle">نقدم مجموعة شاملة من الخدمات المتخصصة</p>
+                
+                <div class="grid">
+                    <div class="card" onclick="showServiceDetails('grooming')">
+                        <div class="card-icon">🐕‍🦺</div>
+                        <h3>صالة الحلاقة والمنتجع</h3>
+                        <p>خدمات تجميل واسترخاء متخصصة</p>
+                        <button class="btn-details">اعرف أكثر</button>
+                    </div>
+                    
+                    <div class="card" onclick="showServiceDetails('rooms')">
+                        <div class="card-icon">🏠</div>
+                        <h3>غرف مزودة بتدفئة وتبريد</h3>
+                        <p>غرف فاخرة مع تحكم ذكي</p>
+                        <button class="btn-details">اعرف أكثر</button>
+                    </div>
+                    
+                    <div class="card" onclick="showServiceDetails('delivery')">
+                        <div class="card-icon">🚗</div>
+                        <h3>خدمة التوصيل   </h3>
+                        <p>نقل آمن وموثوق لحيوانك</p>
+                        <button class="btn-details">اعرف أكثر</button>
+                    </div>
+                    
+                    <div class="card" onclick="showServiceDetails('gardens')">
+                        <div class="card-icon">🌳</div>
+                        <h3>مراعي خارجية آمنة</h3>
+                        <p>حدائق مجهزة مع إشراف مستمر</p>
+                        <button class="btn-details">اعرف أكثر</button>
+                    </div>
+                    
+                    <div class="card" onclick="showServiceDetails('veterinary')">
+                        <div class="card-icon">🏥</div>
+                        <h3>خدمات بيطرية متاحة 24/7</h3>
+                        <p>فحوصات وعلاجات </p>
+                        <button class="btn-details">اعرف أكثر</button>
+                    </div>
+                    
+                    <div class="card" onclick="showServiceDetails('monitoring')">
+                        <div class="card-icon">📹</div>
+                        <h3>مراقبة الحيوانات الأليفة</h3>
+                        <p>كاميرات حية وتحديثات يومية</p>
+                        <button class="btn-details">اعرف أكثر</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الحزم -->
+        <section id="packages">
+            <div class="container">
+                <h2 class="section-title">حزمنا المتنوعة</h2>
+                <p class="section-subtitle">اختر الحزمة التي تناسب احتياجات حيوانك</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon">💎</div>
+                        <h3>الحزمة المميزة</h3>
+                        <p><strong>150 دولار / اليوم</strong></p>
+                        <p style="color:#666;margin-top:1rem;">جميع الخدمات + حمام + تدليك + وجبات فاخرة</p>
+                        <button class="btn-details" onclick="bookPackage('premium')">احجز الآن</button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">⭐</div>
+                        <h3>الحزمة الكلاسيكية</h3>
+                        <p><strong>100 دولار / اليوم</strong></p>
+                        <p style="color:#666;margin-top:1rem;">غرفة فاخرة + طعام + مراقبة + حديقة</p>
+                        <button class="btn-details" onclick="bookPackage('classic')">احجز الآن</button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🌟</div>
+                        <h3>حزمة اليوم</h3>
+                        <p><strong>60 دولار / اليوم</strong></p>
+                        <p style="color:#666;margin-top:1rem;">مشي يومي + منطقة لعب + وجبة واحدة</p>
+                        <button class="btn-details" onclick="bookPackage('daily')">احجز الآن</button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3>حزم مخصصة</h3>
+                        <p><strong>حسب الاحتياجات</strong></p>
+                        <p style="color:#666;margin-top:1rem;">إقامات طويلة + متطلبات إضافية + برامج خاصة</p>
+                        <button class="btn-details" onclick="bookPackage('custom')">اتصل بنا</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المعرج -->
+        <section id="gallery">
+            <div class="container">
+                <h2 class="section-title">معرض صورنا</h2>
+                <p class="section-subtitle">تعرف على مرافقنا الفاخرة</p>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/hero-banner-UpVarj6yLg9VU3cbAFu8Cn.webp" alt="الفندق الفاخر">
+                        <div class="gallery-label">الفندق الفاخر</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/outdoor-garden-aWLNk6to6wf9AQNcp7Kkgv.webp" alt="الحديقة الخارجية">
+                        <div class="gallery-label">الحديقة الخارجية</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/grooming-spa-24DR7cJvP9XHpFLBfeuX3x.webp" alt="صالة الحالقة">
+                        <div class="gallery-label">صالة الحالقة</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/premium-rooms-V7TQgDmsYWQpiidWzVurq6.webp" alt="الغرف الفاخرة">
+                        <div class="gallery-label">الغرف الفاخرة</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/veterinary-care-9pQZZDQxuSzs8fHUNRCmPB.webp" alt="الخدمات البيطرية">
+                        <div class="gallery-label">الخدمات البيطرية</div>
+                    </div>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-text">كلب سعيد</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-text">سنة خبرة</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-text">خدمة متاحة</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-text">رضا العملاء</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الاتصال -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">تواصل معنا</h2>
+                <p class="section-subtitle">نحن هنا لمساعدتك</p>
+                
+                <div class="contact-wrapper">
+                    <div>
+                        <div class="info-card">
+                            <h3>📞 الهاتف</h3>
+                            <p><strong>0778446977</strong></p>
+                        </div>
+                        <div class="info-card">
+                            <h3>💬 WhatsApp</h3>
+                            <p><a href="https://wa.me/970778446977" target="_blank" style="color:#FF6B9D;text-decoration:none;font-weight:600;">اضغط هنا للتواصل</a></p>
+                        </div>
+                        <div class="info-card">
+                            <h3>📍 الموقع</h3>
+                            <p>هونج كونج</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>⏰ ساعات العمل</h3>
+                            <p>متاح 24/7</p>
+                        </div>
+                        <div class="info-card" style="margin-top:2rem;">
+                            <h3>🗺️ موقعنا على الخريطة</h3>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.8236156891!2d114.1729!3d22.2793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404007d3e7d7d7d%3A0x1234567890abcdef!2sHong%20Kong!5e0!3m2!1sar!2s!4v1234567890" width="100%" height="300" style="border:none;border-radius:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form" action="https://formspree.io/f/mnjbyokv" method="POST">
+                        <div class="form-group">
+                            <label for="service">ما الذي سوف تحجزه؟</label>
+                            <select name="service" id="service" required>
+                                <option value="">اختر الخدمة</option>
+                                <option value="صالة الحالقة">صالة الحلاقة </option>
+                                <option value="غرف فاخرة">غرف فاخرة</option>
+                                <option value="خدمة التوصيل">خدمة التوصيل</option>
+                                <option value="حدائق خارجية">حدائق خارجية آمنة</option>
+                                <option value="خدمات بيطرية">خدمات بيطرية</option>
+                                <option value="مراقبة">مراقبة الحيوانات</option>
+                                <option value="حزمة مميزة">حزمة مميزة</option>
+                                <option value="حزمة كلاسيكية">حزمة كلاسيكية</option>
+                                <option value="حزمة يومية">حزمة يومية</option>
+                                <option value="حزم مخصصة">حزم مخصصة</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">اسمك الكامل</label>
+                            <input type="text" name="name" id="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">بريدك الإلكتروني</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pet-name">ما اسم حيوانك؟</label>
+                            <input type="text" name="pet_name" id="pet-name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="check-in">تاريخ الإقامة</label>
+                            <input type="date" name="check_in" id="check-in" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">رقم هاتفك</label>
+                            <input type="tel" name="phone" id="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">ما الذي سوف تحجزه؟</label>
+                            <textarea name="message" id="message" placeholder="اكتب تفاصيل حجزك هنا..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="width:100%;">إرسال الطلب</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- النافذة المنبثقة للخدمات -->
+    <div class="modal" id="serviceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body" id="modalDescription"></div>
+            
+            <button class="btn-primary" style="width:100%;" onclick="bookService()">احجز الآن</button>
+        </div>
+    </div>
+
+    <!-- كود JavaScript -->
+    <script>
+        // دالة عرض القسم
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // دالة عرض تفاصيل الخدمة
+        function showServiceDetails(serviceType) {
+            const services = {
+                grooming: {
+                    title: 'صالة الحلاقة ',
+                    description: '<h3>الخدمات المقدمة:</h3><ul><li>قص شعر متخصص</li><li>تنظيف عميق</li><li>علاجات جلدية</li><li>تدليك مريح</li></ul>'
+                },
+                rooms: {
+                    title: 'غرف مزودة بتدفئة وتبريد',
+                    description: '<h3>مميزات الغرف:</h3><ul><li>تحكم ذكي بالحرارة</li><li>أسرة مريحة جداً</li><li>تلفزيون</li><li>إضاءة ناعمة</li></ul>'
+                },
+                delivery: {
+                    title: 'خدمة التوصيل   ',
+                    description: '<h3>خدمات التوصيل:</h3><ul><li>سيارات آمنة</li><li>سائقون مدربون</li><li>تتبع حي</li><li>رعاية أثناء الرحلة</li></ul>'
+                },
+                gardens: {
+                    title: 'مراعي خارجية آمنة',
+                    description: '<h3>مميزات الحدائق:</h3><ul><li>أسوار آمنة</li><li>ألعاب متنوعة</li><li>إشراف مستمر</li><li>حماية كاملة</li></ul>'
+                },
+                veterinary: {
+                    title: 'خدمات بيطرية متاحة 24/7',
+                    description: '<h3>الخدمات البيطرية:</h3><ul><li>فحوصات دورية</li><li>علاجات طارئة</li><li>تطعيمات</li><li>أدوية</li></ul>'
+                },
+                monitoring: {
+                    title: 'مراقبة الحيوانات الأليفة',
+                    description: '<h3>خدمات المراقبة:</h3><ul><li>كاميرات حية</li><li>تحديثات يومية</li><li>إشعارات فورية</li><li>تقارير مفصلة</li></ul>'
+                }
+            };
+
+            const service = services[serviceType];
+            
+            document.getElementById('modalTitle').textContent = service.title;
+            document.getElementById('modalDescription').innerHTML = service.description;
+            
+            document.getElementById('serviceModal').classList.add('show');
+        }
+
+        // دالة إغلاق النافذة المنبثقة
+        function closeModal() {
+            document.getElementById('serviceModal').classList.remove('show');
+        }
+
+        // دالة حجز الخدمة
+        function bookService() {
+            closeModal();
+            showSection('contact');
+        }
+
+        // دالة حجز الحزمة
+        function bookPackage(packageType) {
+            // إذا كانت حزمة مخصصة، املأ حقل الخدمة
+            if (packageType === 'custom') {
+                document.getElementById('service').value = 'حزم مخصصة';
+            } else if (packageType === 'premium') {
+                document.getElementById('service').value = 'حزمة مميزة';
+            } else if (packageType === 'classic') {
+                document.getElementById('service').value = 'حزمة كلاسيكية';
+            } else if (packageType === 'daily') {
+                document.getElementById('service').value = 'حزمة يومية';
+            }
+            showSection('contact');
+        }
+
+        // دالة التباين العالي
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            
+            const btn = document.getElementById('contrastBtn');
+            btn.style.background = document.body.classList.contains('high-contrast') ? '#FF6B9D' : '#f5f5f5';
+            btn.style.color = document.body.classList.contains('high-contrast') ? 'white' : '#333';
+        }
+
+        // دالة تكبير النصوص
+        function toggleLargeText() {
+            document.body.classList.toggle('large-text');
+            
+            const btn = document.getElementById('textBtn');
+            btn.style.background = document.body.classList.contains('large-text') ? '#FF6B9D' : '#f5f5f5';
+            btn.style.color = document.body.classList.contains('large-text') ? 'white' : '#333';
+        }
+
+        // دالة فتح/إغلاق قائمة الوصول
+        function toggleAccessibilityMenu() {
+            const menu = document.getElementById('accessibilityMenu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // إغلاق قائمة الوصول عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('accessibilityMenu');
+            const btn = document.getElementById('accessibilityBtn');
+            
+            if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.style.display = 'none';
+            }
+        });
+
+        // إضافة فئات CSS للتباين العالي
+        const style = document.createElement('style');
+        style.textContent = `
+            body.high-contrast {
+                background-color: #000;
+                color: #fff;
+            }
+            body.high-contrast nav {
+                background-color: #000;
+                border-bottom: 3px solid #fff;
+            }
+            body.high-contrast .card {
+                background-color: #000;
+                border: 2px solid #fff;
+            }
+            body.large-text {
+                font-size: 1.2em;
+            }
+            body.large-text h1 {
+                font-size: 3.6rem;
+            }
+            body.large-text h2 {
+                font-size: 3rem;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
