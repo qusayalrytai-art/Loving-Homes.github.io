@@ -9,11 +9,11 @@ if (-not (Test-Path -LiteralPath $targetFile)) {
     exit 1
 }
 
-Write-Host "Watching index.html for changes. Press Ctrl+C to stop." -ForegroundColor Cyan
+Write-Host "Watching index.htm for changes. Press Ctrl+C to stop." -ForegroundColor Cyan
 
 $watcher = New-Object System.IO.FileSystemWatcher
 $watcher.Path = $repoRoot
-$watcher.Filter = "index.html"
+$watcher.Filter = "index.htm"
 $watcher.NotifyFilter = [System.IO.NotifyFilters]'LastWrite, Size, FileName'
 $watcher.EnableRaisingEvents = $true
 
