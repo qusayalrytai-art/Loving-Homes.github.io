@@ -9,7 +9,7 @@ if (-not (Test-Path -LiteralPath $targetFile)) {
     exit 1
 }
 
-Write-Host "Watching index.htm for changes. Press Ctrl+C to stop." -ForegroundColor Cyan
+Write-Host "Watching index.htm.htm for changes. Press Ctrl+C to stop." -ForegroundColor Cyan
 
 $watcher = New-Object System.IO.FileSystemWatcher
 $watcher.Path = $repoRoot
