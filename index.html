@@ -627,7 +627,14 @@
             
             <div>
                 <button onclick="toggleLargeText()" id="textBtn" style="width:100%;padding:0.8rem 1rem;background:#f5f5f5;border:2px solid #FF6B9D;border-radius:10px;color:#333;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:'Cairo',sans-serif;font-size:0.95rem;text-align:right;">تكبير النصوص</button>
+            
             </div>
+        <!-- زر القراءة الصوتية -->
+        <div style="margin-bottom:1.2rem;">
+    <button onclick="toggleReadingMode()" id="speechBtn" style="width:100%;padding:0.8rem 1rem;background:#f5f5f5;border:2px solid #FF6B9D;border-radius:10px;color:#333;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:'Cairo',sans-serif;font-size:0.95rem;text-align:right;">
+        🔊 تشغيل القراءة
+    </button>
+</div>
         </div>
     </div>
 
@@ -771,8 +778,8 @@
                     </div>
                     
                     <div class="gallery-item">
-                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/grooming-spa-24DR7cJvP9XHpFLBfeuX3x.webp" alt="صالة الحالقة">
-                        <div class="gallery-label">صالة الحالقة</div>
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663031261862/bG8p3NyH4i2XvH6cAXpYtj/grooming-spa-24DR7cJvP9XHpFLBfeuX3x.webp" alt="صالة الحلاقة">
+                        <div class="gallery-label">صالة الحلاقة</div>
                     </div>
                     
                     <div class="gallery-item">
@@ -1049,6 +1056,45 @@
             }
         `;
         document.head.appendChild(style);
+         let readingMode = false; // هل وضع القراءة مفعل؟
+let speech = null;
+
+// تفعيل/إيقاف وضع القراءة
+function toggleReadingMode() {
+    const btn = document.getElementById("speechBtn");
+    readingMode = !readingMode;
+
+    if(readingMode){
+        btn.innerText = "⏹️ إيقاف القراءة";
+        document.body.style.cursor = "pointer"; // لإظهار أن الموقع في وضع اختيار النص للقراءة
+    } else {
+        btn.innerText = "🔊 تشغيل القراءة";
+        document.body.style.cursor = "default";
+        window.speechSynthesis.cancel();
+    }
+}
+
+// عند النقر على أي نص في الصفحة
+document.addEventListener('click', function(e){
+    if(!readingMode) return;
+
+    let text = "";
+    
+    // إذا المستخدم حدد نص
+    if(window.getSelection().toString()){
+        text = window.getSelection().toString();
+    } else if(e.target && e.target.innerText){
+        text = e.target.innerText;
+    }
+
+    if(text){
+        window.speechSynthesis.cancel(); // إيقاف أي قراءة جارية
+        speech = new SpeechSynthesisUtterance(text);
+        speech.lang = "ar-SA";
+        speech.rate = 1;
+        window.speechSynthesis.speak(speech);
+    }
+});
     </script>
 </body>
 </html>
