@@ -3,7 +3,7 @@ $ErrorActionPreference = ""
 $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $repoRoot
 
-$targetFile = Join-Path $repoRoot "index.htm"
+$targetFile = Join-Path $repoRoot "index.htm.htm"
 if (-not (Test-Path -LiteralPath $targetFile)) {
     Write-Host "index.htm not found in $repoRoot" -ForegroundColor Red
     exit 1
@@ -13,7 +13,7 @@ Write-Host "Watching index.htm for changes. Press Ctrl+C to stop." -ForegroundCo
 
 $watcher = New-Object System.IO.FileSystemWatcher
 $watcher.Path = $repoRoot
-$watcher.Filter = "index.htm"
+$watcher.Filter = "index.htm.htm"
 $watcher.NotifyFilter = [System.IO.NotifyFilters]'LastWrite, Size, FileName'
 $watcher.EnableRaisingEvents = $true
 
@@ -27,7 +27,7 @@ $publishAction = {
         $changes = git status --porcelain
         if (-not $changes) { return }
 
-        git add index.html
+        git add index.htm.htm
         $stamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         git commit -m "Auto publish: $stamp" | Out-Null
         git push | Out-Null
