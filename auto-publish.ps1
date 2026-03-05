@@ -5,7 +5,7 @@ Set-Location $repoRoot
 
 $targetFile = Join-Path $repoRoot "index.htm"
 if (-not (Test-Path -LiteralPath $targetFile)) {
-    Write-Host "index.html.htm not found in $repoRoot" -ForegroundColor Red
+    Write-Host "index.htm not found in $repoRoot" -ForegroundColor Red
     exit 1
 }
 
